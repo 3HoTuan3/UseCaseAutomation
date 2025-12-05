@@ -2,17 +2,14 @@ import test from "@playwright/test";
 import { HomePage } from "../pages/home.page";
 import { LoginPage } from "../pages/login.page";
 
-test('An error message is displayed when user login with non-existent account', async ({ page }) => {
+test('An error message displays when user tries to login with blank password', async ({ page }) => {
     const homePage = new HomePage(page);
     const loginPage = new LoginPage(page);
-    const nonExistentEmail = 'nonexistent@example.com';
-    const password = '123456789';
+    const email = 'cijnuj@ramcloud.us';
 
     await page.goto('http://railwayb2.somee.com/Page/HomePage.cshtml');
 
     await homePage.navigateToLogin();
-    await loginPage.login(nonExistentEmail, password);
-    await loginPage.shouldErrorMessageVisible();
+    await loginPage.login(email, '');
+    await loginPage.shouldBlankPasswordErrorVisible();
 });
-
-
