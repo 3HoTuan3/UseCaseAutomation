@@ -1,4 +1,4 @@
-import { Locator , Page } from "@playwright/test";
+import { expect, Locator , Page } from "@playwright/test";
 
 export class LoginPage {
     private readonly page: Page;
@@ -19,4 +19,11 @@ export class LoginPage {
         await this.passwordTxt.fill(password);
         await this.loginBtn.click();
     }
+
+    async shouldErrorMessageVisible(): Promise<void> {
+        const errorMsg = this.page.locator('p.message.error.LoginForm');
+        await expect(errorMsg).toBeVisible();
+        await expect(errorMsg).toContainText('Invalid username or password. Please try again.');
+    }
+
 }
