@@ -20,7 +20,7 @@ test("Error message displays when New Password match with the current password",
   await loginPage.login(email, originalPassword);
   await homePage.shouldWelcomeMsgVisible(email);
 
-  // change password with incorrect password
+  // change password current password with the same password
   await homePage.navigateToChangePassword();
   await changePasswordPage.changePassword(
     originalPassword,
