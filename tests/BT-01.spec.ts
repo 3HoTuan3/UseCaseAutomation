@@ -3,24 +3,16 @@ import { HomePage } from "../pages/home.page";
 import { LoginPage } from "../pages/login.page";
 import { BookTicketPage } from "../pages/book-ticket.page";
 
-const BASE_URL = "http://railwayb2.somee.com/Page/HomePage.cshtml";
-const TEST_EMAIL = "cijnuj@ramcloud.us";
-const TEST_PASSWORD = "123456789";
-
-async function loginUser(page: Page) {
-  const homePage = new HomePage(page);
-  const loginPage = new LoginPage(page);
-
-  await page.goto(BASE_URL);
-  await homePage.navigateToLogin();
-  await loginPage.login(TEST_EMAIL, TEST_PASSWORD);
-  await homePage.shouldWelcomeMsgVisible(TEST_EMAIL);
-}
-
 test("BT-01: User can successfully book a ticket with valid information", async ({
   page,
 }) => {
-  await loginUser(page);
+  const homePage = new HomePage(page);
+  const loginPage = new LoginPage(page);
+
+  await homePage.navigateToHomePage();
+  await homePage.navigateToLogin();
+  await loginPage.login();
+  await homePage.shouldWelcomeMsgVisible("testrail@gmail.com");
 
   const bookTicketPage = new BookTicketPage(page);
 
@@ -29,7 +21,7 @@ test("BT-01: User can successfully book a ticket with valid information", async 
   const amount = Math.floor(Math.random() * 10) + 1;
 
   await bookTicketPage.selectBookingInfo(
-    "12/10/2025",
+    "12/23/2025",
     "Sài Gòn",
     "Phan Thiết",
     "Hard seat",
@@ -45,7 +37,7 @@ test("BT-01: User can successfully book a ticket with valid information", async 
   ).toBeVisible();
 
   await expect(page.locator("table.MyTable")).toBeVisible();
-  
+
   await expect(
     page.locator("table.MyTable td").filter({ hasText: String(amount) }),
   ).toBeVisible();
