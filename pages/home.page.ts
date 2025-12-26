@@ -7,6 +7,10 @@ export class HomePage {
   private readonly navRegister: Locator;
   private readonly navLogout: Locator;
   private readonly navContact: Locator;
+  private readonly navFaq: Locator;
+  private readonly navTimetable: Locator;
+  private readonly navTicketPrice: Locator;
+  private readonly navBookTicket: Locator;
   
   constructor(page: Page) {
     this.page = page;
@@ -19,6 +23,10 @@ export class HomePage {
     this.navRegister = this.page.getByRole("link", { name: "Register" });
     this.navContact = this.page.getByRole("link", { name: "Contact" });
     this.navLogout = this.page.getByRole("link", { name: "Log out" });
+    this.navFaq = this.page.getByRole("link", { name: "FAQ" });
+    this.navTimetable = this.page.getByRole("link", { name: "Timetable" });
+    this.navTicketPrice = this.page.getByRole("link", { name: "Ticket price" });
+    this.navBookTicket = this.page.getByRole("link", { name: "Book ticket" });
   }
 
   async navigateToHomePage(): Promise<void> {
@@ -46,7 +54,33 @@ export class HomePage {
   }
 
   async navigateToContact(): Promise<void> {
-    await this.navContact.click();
+    await test.step("Navigate to Contact Page", async () => {
+      await this.navContact.click();
+    });
+  }
+
+  async navigateToFaq(): Promise<void> {
+    await test.step("Navigate to FAQ Page", async () => {
+      await this.navFaq.click();
+    });
+  }
+
+  async navigateToTimetable(): Promise<void> {
+    await test.step("Navigate to Timetable Page", async () => {
+      await this.navTimetable.click();
+    });
+  }
+
+  async navigateToTicketPrice(): Promise<void> {
+    await test.step("Navigate to Ticket Price Page", async () => {
+      await this.navTicketPrice.click();
+    });
+  }
+
+  async navigateToBookTicket(): Promise<void> {
+    await test.step("Navigate to Book Ticket Page", async () => {
+      await this.navBookTicket.click();
+    });
   }
 
   async logout(): Promise<void> {
@@ -55,7 +89,6 @@ export class HomePage {
     });
   }
 
-  // Thay đổi: nhận email (tuỳ chọn) và kiểm tra welcome message
   async shouldWelcomeMsgVisible(email: string): Promise<void> {
     const welcomeMsg = this.page.getByText(`Welcome ${email}`);
     await expect(welcomeMsg).toBeVisible();
