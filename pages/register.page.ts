@@ -12,6 +12,7 @@ export class RegisterPage {
   private readonly emailValidationLabel: Locator;
   private readonly passwordValidationLabel: Locator;
   private readonly confirmPasswordValidationLabel: Locator;
+  private readonly pidValidationLabel: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -30,6 +31,9 @@ export class RegisterPage {
     );
     this.confirmPasswordValidationLabel = this.page.locator(
       'label.validation-error[for="confirmPassword"]',
+    );
+    this.pidValidationLabel = this.page.locator(
+      'label.validation-error[for="pid"]',
     );
   }
 
@@ -103,6 +107,20 @@ export class RegisterPage {
 
   async isConfirmPasswordValidationVisible(): Promise<boolean> {
     return await this.confirmPasswordValidationLabel
+      .waitFor({ state: "visible", timeout: 1500 })
+      .then(() => true)
+      .catch(() => false);
+  }
+
+  async getPidValidationText(): Promise<string> {
+    await this.pidValidationLabel
+      .waitFor({ state: "visible", timeout: 3000 })
+      .catch(() => { });
+    return (await this.pidValidationLabel.textContent()) ?? "";
+  }
+
+  async isPidValidationVisible(): Promise<boolean> {
+    return await this.pidValidationLabel
       .waitFor({ state: "visible", timeout: 1500 })
       .then(() => true)
       .catch(() => false);
