@@ -1,24 +1,24 @@
-import { expect, Locator, Page } from "@playwright/test";
-
 export class HomePage {
   private readonly page: Page;
   private readonly navBarLogin: Locator;
   private readonly navChangePassword: Locator;
   private readonly navRegister: Locator;
-  private readonly navLogout: Locator;
   private readonly navContact: Locator;
-  
+  private readonly navLogout: Locator;
+  private readonly navMyTicket: Locator;
+
   constructor(page: Page) {
     this.page = page;
-    this.navBarLogin = this.page.getByRole("link", {
-      name: "Login",
-    });
+
+    this.navBarLogin = this.page.getByRole("link", { name: "Login" });
     this.navChangePassword = this.page.getByRole("link", {
       name: "Change password",
     });
     this.navRegister = this.page.getByRole("link", { name: "Register" });
     this.navContact = this.page.getByRole("link", { name: "Contact" });
     this.navLogout = this.page.getByRole("link", { name: "Log out" });
+
+    this.navMyTicket = this.page.getByRole("link", { name: "My ticket" });
   }
 
   async navigateToHomePage(): Promise<void> {
@@ -29,23 +29,10 @@ export class HomePage {
     await this.navBarLogin.click();
   }
 
-  async navigateToChangePassword(): Promise<void> {
-    await this.navChangePassword.click();
+  async openMyTicketTab(): Promise<void> {
+    await this.navMyTicket.click();
   }
 
-  async navigateToRegister(): Promise<void> {
-    await this.navRegister.click();
-  }
-
-  async navigateToContact(): Promise<void> {
-    await this.navContact.click();
-  }
-
-  async logout(): Promise<void> {
-    await this.navLogout.click();
-  }
-
-  // Thay đổi: nhận email (tuỳ chọn) và kiểm tra welcome message
   async shouldWelcomeMsgVisible(email: string): Promise<void> {
     const welcomeMsg = this.page.getByText(`Welcome ${email}`);
     await expect(welcomeMsg).toBeVisible();

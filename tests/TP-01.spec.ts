@@ -8,6 +8,7 @@ test("TP-01: UI of ticket price page displays properly", async ({ page }) => {
   const loginPage = new LoginPage(page);
   const ticketPricePage = new TicketPricePage(page);
 
+  await homePage.navigateToHomePage();
   await homePage.navigateToLogin();
   await loginPage.login();
 
