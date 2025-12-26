@@ -125,4 +125,18 @@ export class RegisterPage {
       .then(() => true)
       .catch(() => false);
   }
+
+  async getPidFormatValidationText(): Promise<string> {
+    await this.pidValidationLabel
+      .waitFor({ state: "visible", timeout: 3000 })
+      .catch(() => { });
+    return (await this.pidValidationLabel.textContent()) ?? "";
+  }
+
+  async isPidFormatValidationVisible(): Promise<boolean> {
+    return await this.pidValidationLabel
+      .waitFor({ state: "visible", timeout: 1500 })
+      .then(() => true)
+      .catch(() => false);
+  }
 }
