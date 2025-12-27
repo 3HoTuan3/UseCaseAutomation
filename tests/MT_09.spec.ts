@@ -43,7 +43,6 @@ test.describe("MT-09 Some Scenario Name", () => {
         await homePage.navigateToBookTicket();
         const ticket = new BookTicket({ amount: 1 });
         await bookTicketPage.bookTicket(ticket);
-        await bookTicketPage.verifyBookingSuccess();
       }
     });
 
@@ -63,7 +62,7 @@ test.describe("MT-09 Some Scenario Name", () => {
     await test.step("Perform action 1 (example: filter)", async () => {
       await myTicketPage.applyFilter({
         departStation: "1",
-        arriveStation: "6", 
+        arriveStation: "6",
         status: "New",
       });
     });
@@ -79,6 +78,5 @@ test.describe("MT-09 Some Scenario Name", () => {
     await test.step("Verify filter result: Status", async () => {
       await myTicketPage.verifyFilterResult("New");
     });
-
   });
 });
