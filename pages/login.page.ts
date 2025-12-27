@@ -6,8 +6,6 @@ export class LoginPage {
   private readonly usernameTxt: Locator;
   private readonly passwordTxt: Locator;
   private readonly loginBtn: Locator;
-  public static readonly DEFAULT_USERNAME: string = "testrail@gmail.com";
-  public static readonly DEFAULT_PASSWORD: string = "123456789";
 
   constructor(page: Page) {
     this.page = page;

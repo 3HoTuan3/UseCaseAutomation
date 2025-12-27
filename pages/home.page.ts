@@ -13,7 +13,7 @@ export class HomePage {
   private readonly navTimetable: Locator;
   private readonly navTicketPrice: Locator;
   private readonly navBookTicket: Locator;
-  
+
   constructor(page: Page) {
     this.page = page;
     this.navBarLogin = this.page.getByRole("link", {
@@ -67,12 +67,6 @@ export class HomePage {
     });
   }
 
-  async navigateToTimetable(): Promise<void> {
-    await test.step("Navigate to Timetable Page", async () => {
-      await this.navTimetable.click();
-    });
-  }
-
   async navigateToTicketPrice(): Promise<void> {
     await test.step("Navigate to Ticket Price Page", async () => {
       await this.navTicketPrice.click();
@@ -83,6 +77,10 @@ export class HomePage {
     await test.step("Navigate to Book Ticket Page", async () => {
       await this.navBookTicket.click();
     });
+  }
+
+  async navigateToTimetable(): Promise<void> {
+    await this.navTimetable.click();
   }
 
   async logout(): Promise<void> {
@@ -231,6 +229,16 @@ export class HomePage {
 
     await test.step("Click on Change Password tab", async () => {
       await this.navigateAndVerifyChangePassword();
+    });
+  }
+
+  async verifyLoggedOut(): Promise<void> {
+    await test.step("Verify user is logged out", async () => {
+      const welcomeMsg = this.page.getByText(/guest!/);
+      expect(this.page).toHaveURL(
+        "http://railwayb2.somee.com/Page/HomePage.cshtml",
+      );
+      expect(welcomeMsg.isVisible());
     });
   }
 }
