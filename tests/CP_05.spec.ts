@@ -30,12 +30,17 @@ test("Error message displays when New Password match with the current password",
   await homePage.navigateToLogin();
   await loginPage.login(user);
 
-  // change password with same password
-  await homePage.navigateToChangePassword();
-  await changePasswordPage.changePassword(
-    user,
-    tempNewPassword,
-    tempNewPassword,
-  );
-  await changePasswordPage.errorMessageVisible("Error");
+  await test.step("Change password with current password", async () => {
+    // change password with same password
+    await homePage.navigateToChangePassword();
+    await changePasswordPage.changePassword(
+      user,
+      tempNewPassword,
+      tempNewPassword,
+    );
+  });
+
+  await test.step("Verify error message displays", async () => {
+    await changePasswordPage.errorMessageVisible("Error");
+  });
 });

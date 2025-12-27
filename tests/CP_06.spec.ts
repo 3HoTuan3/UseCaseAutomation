@@ -31,13 +31,17 @@ test("Verify error message displays when New Password and Confirm Password do no
   await homePage.navigateToLogin();
   await loginPage.login(user);
 
-  // change password with non matching confirm password
-  await homePage.navigateToChangePassword();
-  await changePasswordPage.changePassword(
-    user,
-    tempNewPassword,
-    incorrectConfirmPassword,
-  );
+  // change password
+  await test.step("Change password with non matching confirm password", async () => {
+    await homePage.navigateToChangePassword();
+    await changePasswordPage.changePassword(
+      user,
+      tempNewPassword,
+      incorrectConfirmPassword,
+    );
+  });
 
-  await changePasswordPage.errorMessageVisible("Error");
+  await test.step("Verify error message displays", async () => {
+    await changePasswordPage.errorMessageVisible("Error");
+  });
 });

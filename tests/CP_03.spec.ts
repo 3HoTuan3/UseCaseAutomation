@@ -35,11 +35,17 @@ test("Verify error message displays when user enter incorrect current password",
   user.password = incorrectPassword;
 
   // enter incorrect current password
-  await homePage.navigateToChangePassword();
-  await changePasswordPage.changePassword(
-    user,
-    tempNewPassword,
-    tempNewPassword,
-  );
-  await changePasswordPage.errorMessageVisible("Error");
+
+  await test.step("Change password with incorrect current password", async () => {
+    await homePage.navigateToChangePassword();
+    await changePasswordPage.changePassword(
+      user,
+      tempNewPassword,
+      tempNewPassword,
+    );
+  });
+
+  await test.step("Verify error message displays", async () => {
+    await changePasswordPage.errorMessageVisible("Error");
+  });
 });

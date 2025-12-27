@@ -15,5 +15,8 @@ test("UI of Change Password page displays properly", async ({ page }) => {
   await homePage.navigateToLogin();
   await loginPage.login(user);
   await homePage.navigateToChangePassword();
-  await changePasswordPage.shouldComponentsVisible();
+
+  await test.step("Assertion: Verify UI displays properly", async () => {
+    await changePasswordPage.shouldComponentsVisible();
+  });
 });

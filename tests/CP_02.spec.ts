@@ -35,19 +35,24 @@ for (const lengthCase of lengthCases) {
     await loginPage.login(user);
 
     // Change password
+
     await homePage.navigateToChangePassword();
-    await changePasswordPage.changePassword(
-      user,
-      tempNewPassword,
-      tempNewPassword,
-    );
+    await test.step("Change current password", async () => {
+      await changePasswordPage.changePassword(
+        user,
+        tempNewPassword,
+        tempNewPassword,
+      );
 
-    // Update password in user object
-    user.password = tempNewPassword;
+      // Update password in user object
+      user.password = tempNewPassword;
+    });
 
-    // Re-login with new password to verify
-    await homePage.logout();
-    await homePage.navigateToLogin();
-    await loginPage.login(user);
+    await test.step("Assertion: Verify user's password is successfully updated", async () => {
+      // Re-login with new password to verify
+      await homePage.logout();
+      await homePage.navigateToLogin();
+      await loginPage.login(user);
+    });
   });
 }

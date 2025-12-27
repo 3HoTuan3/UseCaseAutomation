@@ -35,13 +35,17 @@ for (const lengthCase of lengthCases) {
     await homePage.navigateToLogin();
     await loginPage.login(user);
 
-    await homePage.navigateToChangePassword();
-    await changePasswordPage.changePassword(
-      user,
-      tempNewPassword,
-      tempNewPassword,
-    );
+    await test.step(`Change current password with new password length ${lengthCase}`, async () => {
+      await homePage.navigateToChangePassword();
+      await changePasswordPage.changePassword(
+        user,
+        tempNewPassword,
+        tempNewPassword,
+      );
+    });
 
-    await changePasswordPage.errorMessageVisible("Error");
+    await test.step("Verify error message displays", async () => {
+      await changePasswordPage.errorMessageVisible("Error");
+    });
   });
 }
