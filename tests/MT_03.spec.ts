@@ -33,14 +33,14 @@ test.describe("MT-03 Cancel Tickets", () => {
 
 
     await test.step("Precondition: Book a ticket", async () => {
-      await homePage.openBookTicketTab();  
+      await homePage.navigateToBookTicket();  
       const ticket = new BookTicket();
       await bookTicketPage.bookTicket(ticket);
     });
 
     let beforeCount = 0;
     await test.step("Action: Open My Ticket and Count tickets before canceling", async () => {
-        await homePage.openMyTicketTab();
+        await homePage.navigateToMyTicket();
         beforeCount = await myTicketPage.getTicketCount();
         expect(beforeCount).toBeGreaterThan(0);
     });

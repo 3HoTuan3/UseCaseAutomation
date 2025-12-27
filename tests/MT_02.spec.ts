@@ -12,7 +12,7 @@ test.describe("MT-02 View Booked Tickets", () => {
         await homePage.navigateToHomePage();
         await homePage.navigateToLogin();
         await loginPage.login(user);
-        await homePage.openMyTicketTab();
+        await homePage.navigateToMyTicket();
   });
 
   test("MT-02 Users can view the booked tickets", async ({ page }) => {

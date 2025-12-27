@@ -13,7 +13,7 @@ test.describe("MT-04 Filter Visibility", () => {
         await homePage.navigateToHomePage();
         await homePage.navigateToLogin();
         await loginPage.login(user);
-        await homePage.openMyTicketTab();
+        await homePage.navigateToBookTicket();
     });
   });
 

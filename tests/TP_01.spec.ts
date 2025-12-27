@@ -15,7 +15,7 @@ test.describe("TP-01 View Ticket Price", () => {
     await homePage.navigateToLogin();
     await loginPage.login(user);
     
-    await homePage.openTicketPriceTab();
+    await homePage.navigateToTicketPrice();
   });
 
   test("TP-01 UI of ticket price page displays properly", async ({ page }) => {

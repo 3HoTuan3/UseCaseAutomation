@@ -37,13 +37,13 @@ test.describe("MT-06 Filter Combined Criteria", () => {
 
     await test.step("Book 6 tickets (quantity = 1 each)", async () => {
       for (let i = 0; i < 6; i++) {
-        await homePage.openBookTicketTab();
+        await homePage.navigateToBookTicket();
         const ticket = new BookTicket(1);
         await bookTicketPage.bookTicket(ticket);
       }
     });
 
-    await homePage.openMyTicketTab();
+    await homePage.navigateToMyTicket();
   });
 
   test("MT-06 Users can filter by combining multiple criteria", async ({

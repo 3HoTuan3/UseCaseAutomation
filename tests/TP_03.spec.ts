@@ -17,7 +17,7 @@ test.describe("TP-03 View Ticket Price Detail", () => {
     const ticketPricePage = new TicketPricePage(page);
     await ticketPricePage.clickCheckPriceFirstRow();
     
-    await homePage.openTicketPriceTab();
+    await homePage.navigateToTicketPrice();
   });
 
   test("TP-03 Ticket price detail table displays properly", async ({

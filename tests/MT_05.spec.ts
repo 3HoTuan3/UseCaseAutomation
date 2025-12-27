@@ -43,7 +43,7 @@ test.describe("MT-05 Filter Specific Criteria (book 6 tickets)", () => {
 
     await test.step("Pre-condition: User books 6 tickets", async () => {
       for (let i = 0; i < 6; i++) {
-        await homePage.openBookTicketTab();
+        await homePage.navigateToBookTicket();
 
         // set cứng số lượng book là 1
         const ticket = new BookTicket(1);
@@ -51,7 +51,7 @@ test.describe("MT-05 Filter Specific Criteria (book 6 tickets)", () => {
       }
     });
 
-    await homePage.openMyTicketTab();
+    await homePage.navigateToMyTicket();
     
     await test.step("Scenario: Filter by Depart Station", async () => {
       await page.reload();

@@ -63,19 +63,6 @@ export class HomePage {
     });
   }
 
-
-  async openMyTicketTab(): Promise<void> {
-    await test.step("Open My Ticket page", async () => {
-      await this.navMyTicket.click();
-    });
-  }
-
-  async openTicketPriceTab(): Promise<void> {
-    await test.step("Open Ticket Price page", async () => {
-      await this.navTicketPrice.click();
-    });
-  }
-
   async navigateToFaq(): Promise<void> {
     await test.step("Navigate to FAQ Page", async () => {
       await this.navFaq.click();
@@ -98,6 +85,12 @@ export class HomePage {
     await test.step("Navigate to Book Ticket Page", async () => {
       await this.navBookTicket.click();
     });
+  }
+  
+  async navigateToMyTicket(): Promise<void> {
+    await test.step("Navigate to My Ticket Page", async () => {
+      await this.navMyTicket.click();
+    })
   }
 
   async logout(): Promise<void> {

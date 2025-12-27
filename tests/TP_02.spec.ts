@@ -14,7 +14,7 @@ test.describe("TP-02 Check Ticket Price", () => {
     await homePage.navigateToLogin();
     await loginPage.login(user);
     
-    await homePage.openTicketPriceTab();
+    await homePage.navigateToTicketPrice();
   });
 
   test("TP-02 User can check ticket prices of the trip", async ({ page }) => {
