@@ -17,16 +17,6 @@ function generateEmailWithLength(len: number): string {
     return `${local}${smallSuffix}`;
 }
 
-function generatePasswordWithLength(len: number): string {
-    if (len <= 0) return "";
-    return faker.string.alphanumeric(len);
-}
-
-function generatePidWithLength(len: number): string {
-    if (len <= 0) return "";
-    return faker.string.numeric(len);
-}
-
 test.describe.parallel("REG_01 - Register new account (boundary lengths)", () => {
     test.describe("REG_01a - Register with valid email lengths", () => {
         for (const eLen of emailLengths) {
@@ -35,8 +25,8 @@ test.describe.parallel("REG_01 - Register new account (boundary lengths)", () =>
                 const registerPage = new RegisterPage(page);
 
                 const email = generateEmailWithLength(eLen);
-                const password = generatePasswordWithLength(12);
-                const pid = generatePidWithLength(9);
+                const password = faker.internet.password();
+                const pid = faker.string.numeric(9);
                 const user = new User({ username: email, password, confirmPassword: password, pid });
 
                 await test.step('Navigate to Register Page', async () => {
@@ -60,8 +50,8 @@ test.describe.parallel("REG_01 - Register new account (boundary lengths)", () =>
                 const registerPage = new RegisterPage(page);
 
                 const email = generateEmailWithLength(18); 
-                const password = generatePasswordWithLength(pLen);
-                const pid = generatePidWithLength(9);
+                const password = faker.string.alphanumeric(pLen);
+                const pid = faker.string.numeric(9);
                 const user = new User({ username: email, password, confirmPassword: password, pid });
 
                 await test.step('Navigate to Register Page', async () => {
@@ -85,8 +75,8 @@ test.describe.parallel("REG_01 - Register new account (boundary lengths)", () =>
                 const registerPage = new RegisterPage(page);
 
                 const email = generateEmailWithLength(18);
-                const password = generatePasswordWithLength(12);
-                const pid = generatePidWithLength(pidLen);
+                const password = faker.internet.password();
+                const pid = faker.string.numeric(pidLen);
                 const user = new User({ username: email, password, confirmPassword: password, pid });
 
                 await test.step('Navigate to Register Page', async () => {
