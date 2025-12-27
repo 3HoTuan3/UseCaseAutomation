@@ -11,5 +11,5 @@ test("User can login successfully with valid account", async ({ page }) => {
   await homePage.navigateToHomePage();
   await homePage.navigateToLogin();
   await loginPage.login(user);
-  await homePage.shouldWelcomeMsgVisible("testrail@gmail.com");
+  await homePage.shouldWelcomeMsgVisible(user.username);
 });
