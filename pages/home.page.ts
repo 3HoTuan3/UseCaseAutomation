@@ -1,4 +1,6 @@
 import { test, expect, Locator, Page } from "@playwright/test";
+import { User } from "../models/user";
+import { LoginPage } from "./login.page";
 
 export class HomePage {
   private readonly page: Page;
@@ -10,6 +12,8 @@ export class HomePage {
   private readonly navMyTicket: Locator;
   private readonly navBookTicket: Locator;
   private readonly navTicketPrice: Locator;
+  private readonly navFaq: Locator;
+  private readonly navTimetable: Locator;
   
   constructor(page: Page) {
     this.page = page;
@@ -24,6 +28,9 @@ export class HomePage {
     this.navMyTicket = page.getByRole("link", { name: "My ticket" });
     this.navBookTicket = page.getByRole("link", { name: "Book ticket" });
     this.navTicketPrice = page.getByRole("link", { name: "Ticket Price" });
+    this.navFaq = this.page.getByRole("link", { name: "FAQ" });
+    this.navTimetable = this.page.getByRole("link", { name: "Timetable" });
+    this.navBookTicket = this.page.getByRole("link", { name: "Book ticket" });
   }
 
   async navigateToHomePage(): Promise<void> {
@@ -52,6 +59,7 @@ export class HomePage {
 
   async navigateToContact(): Promise<void> {
     await test.step("Navigate to Contact Page", async () => {
+      await test.step("Navigate to Contact Page", async () => {
       await this.navContact.click();
     });
   }
@@ -67,11 +75,29 @@ export class HomePage {
       await this.navTicketPrice.click();
     })
   }
-  
-  async openBookTicketTab(): Promise<void> {
-    await test.step("Open Book Ticket page", async () => {
+
+  async navigateToFaq(): Promise<void> {
+    await test.step("Navigate to FAQ Page", async () => {
+      await this.navFaq.click();
+    });
+  }
+
+  async navigateToTimetable(): Promise<void> {
+    await test.step("Navigate to Timetable Page", async () => {
+      await this.navTimetable.click();
+    });
+  }
+
+  async navigateToTicketPrice(): Promise<void> {
+    await test.step("Navigate to Ticket Price Page", async () => {
+      await this.navTicketPrice.click();
+    });
+  }
+
+  async navigateToBookTicket(): Promise<void> {
+    await test.step("Navigate to Book Ticket Page", async () => {
       await this.navBookTicket.click();
-    })
+    });
   }
 
   async logout(): Promise<void> {
@@ -81,9 +107,7 @@ export class HomePage {
   }
 
   async shouldWelcomeMsgVisible(email: string): Promise<void> {
-    await test.step("Verify welcome message is visible", async () => {
-      const welcomeMsg = this.page.getByText(`Welcome ${email}`);
-      await expect(welcomeMsg).toBeVisible();
-    });
+    const welcomeMsg = this.page.getByText(`Welcome ${email}`);
+    await expect(welcomeMsg).toBeVisible();
   }
 }
